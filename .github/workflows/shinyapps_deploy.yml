@@ -38,13 +38,7 @@ jobs:
         shell: bash
         run: |
           source .venv/bin/activate
-          pip install --upgrade pip
-          pip install poetry
-          git clone --single-branch --branch develop https://github.com/sage-bionetworks/schematic
-          cd schematic
-          poetry config virtualenvs.create false
-          poetry build
-          pip install dist/schematicpy-1.0.0-py3-none-any.whl
+          pip install pandas
           
       - name: zip virtual env
         shell: bash
