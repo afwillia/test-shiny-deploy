@@ -1,0 +1,34 @@
+# Workflow derived from https://github.com/r-lib/actions/tree/master/examples
+# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
+
+name: shiny-deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  shiny-deploy:
+    runs-on: ubuntu-latest
+    # This image seems to be based on rocker/r-ver which in turn is based on debian
+    container: rocker/rstudio:latest
+    env:
+      # This should not be necessary for installing from public repo's however remotes::install_github() fails without it.
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      POETRY_VERSION: 1.2.0rc1
+      
+    steps:
+      - name: Authorize and deploy app
+        shell: Rscript {0}
+        run: |
+          repo <- Sys.getenv("GITHUB_REPOSITORY")
+          appName <- strsplit(repo, "/")[[1]][2]
+          
+          rsConnectUser <- "${{ secrets.RSCONNECT_USER }}"
+          rsConnectToken <- "${{ secrets.RSCONNECT_TOKEN }}"
+          rsConnectSecret <- "${{ secrets.RSCONNECT_SECRET }}"
+          
+           message(sprintf("Deploying to %s instance.", appName))
+          rsconnect::setAccountInfo(rsConnectUser, rsConnectToken, rsConnectSecret)
+          rsconnect::deployApp(appName = appName)
