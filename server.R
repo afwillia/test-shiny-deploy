@@ -4,6 +4,7 @@ server <- function(input, output){
   system("chmod -R +x .venv")
   
   library(reticulate)
+  use_virtualenv(file.path(getwd(), ".venv"))
   import("schematicpy")
   
   function(){
