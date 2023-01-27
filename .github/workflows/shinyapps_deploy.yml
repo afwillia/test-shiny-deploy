@@ -32,11 +32,12 @@ jobs:
         run: |
           python3.10 -m venv .venv
           chmod 755 .venv/bin/activate
-          ./.venv/bin/activate
+          .venv/bin/activate
       
       - name: python
+        shell: bash
         run: |
-          ./.venv/bin/activate
+          source .venv/bin/activate
           pip install --upgrade pip
           pip install poetry
           git clone --single-branch --branch develop https://github.com/sage-bionetworks/schematic
