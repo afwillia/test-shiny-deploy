@@ -4,18 +4,16 @@ server <- function(input, output){
   system("chmod -R +x .venv")
   
   library(reticulate)
-  use_virtualenv(file.path(getwd(), ".venv"), required = TRUE)
-  import("schematicpy")
   
-  function(){
-    #reticulate::use_virtualenv(file.path(getwd(), ".venv"), required = TRUE)
+  load_schematic <- function(){
+    reticulate::use_virtualenv(file.path(getwd(), ".venv"), required = TRUE)
     syn <<- reticulate::import("synapseclient")$Synapse()
     
     MetadataModel <<- reticulate::import("schematic.models.metadata")$MetadataModel
     CONFIG <<- reticulate::import("schematic")$CONFIG
     SchemaGenerator <<- reticulate::import("schematic.schemas.generator")$SchemaGenerator
     
-    config = CONFIG$load_config("schematic_config.yml")
+    config = CONFIG$load_config("schematic/schematic_config.yml")
     
     inputMModelLocation = config$model$input$location
     inputMModelLocationType = config$model$input$file_type
@@ -30,6 +28,8 @@ server <- function(input, output){
     
     synapse_driver <<- reticulate::import("schematic.store.synapse")$SynapseStorage
   }
+  
+  load_schematic()
   
   observeEvent(input$action, {
     cat("action button") 
