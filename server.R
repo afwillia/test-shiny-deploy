@@ -5,7 +5,7 @@ server <- function(input, output){
   
   library(reticulate)
   use_virtualenv(file.path(getwd(), ".venv"), required = TRUE)
-  import("pandas")
+  import("schematicpy")
   
   function(){
     #reticulate::use_virtualenv(file.path(getwd(), ".venv"), required = TRUE)
