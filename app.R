@@ -5,7 +5,7 @@ ui <- fluidPage(
   actionButton("action", label = "Add row to table"),
 )
 
-server <- function(input, output, session){
+server <- function(input, output){
     observeEvent(input$action, {
       cat("action button") 
     })
