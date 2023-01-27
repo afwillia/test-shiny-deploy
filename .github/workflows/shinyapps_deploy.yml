@@ -22,6 +22,8 @@ jobs:
       - name: Authorize and deploy app
         shell: Rscript {0}
         run: |
+          install.packages(c("rsconnect", "shiny"))
+        
           repo <- Sys.getenv("GITHUB_REPOSITORY")
           appName <- strsplit(repo, "/")[[1]][2]
           
