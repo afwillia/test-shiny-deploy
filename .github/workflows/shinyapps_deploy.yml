@@ -22,13 +22,19 @@ jobs:
       - name: Install System Dependencies
         run: |
           sudo apt-get update
+          sudo apt-get install pip python3.10-venv
           
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-pandoc@v2
       
       - name: python
         run: |
-          python3 --version
+          pip install poetry
+          git clone --single-branch --branch develop https://github.com/sage-bionetworks/schematic
+          cd schematic
+          poetry config virtualenvs.create false
+          poetry shell
+          poetry install
           
       - name: Authorize and deploy app
         shell: Rscript {0}
