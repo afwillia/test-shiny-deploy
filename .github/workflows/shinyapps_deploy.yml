@@ -19,11 +19,14 @@ jobs:
       POETRY_VERSION: 1.2.0rc1
       
     steps:
+      - name: Install System Dependencies
+        run: |
+          sudo apt-get update
+          
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-pandoc@v2
       
       - name: python
-        shell: bash
         run: |
           python3 --version
           
