@@ -6,6 +6,10 @@ server <- function(input, output){
   library(reticulate)
 
   reticulate::use_virtualenv(file.path(getwd(), ".venv"), required = TRUE)
+  
+  message(system("python3", "--version"))
+  message(sprintf("reticulate py version: %s"), reticulate::py_version())
+  
   syn <<- reticulate::import("synapseclient")$Synapse()
   
   MetadataModel <<- reticulate::import("schematic.models.metadata")$MetadataModel
