@@ -3,8 +3,8 @@ system("chmod -R +x .venv")
 
 library(reticulate)
 
-message(system("python3", "--version"))
-message(system(".venv/bin/python3", "--version"))
+message(system2("python3", "--version"))
+message(system2(".venv/bin/python3", "--version"))
 
 reticulate::use_virtualenv(file.path(getwd(), ".venv"), required = TRUE)
 
