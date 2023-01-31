@@ -3,9 +3,11 @@ system("chmod -R +x .venv")
 
 library(reticulate)
 
+message(system("python3", "--version"))
+message(system(".venv/bin/python3", "--version"))
+
 reticulate::use_virtualenv(file.path(getwd(), ".venv"), required = TRUE)
 
-message(system("python3", "--version"))
 message(sprintf("reticulate py version: %s"), reticulate::py_version())
 
 syn <<- reticulate::import("synapseclient")$Synapse()
