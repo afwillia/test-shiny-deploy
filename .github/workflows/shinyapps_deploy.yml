@@ -21,7 +21,7 @@ jobs:
       - name: Install System Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install python10-venv pip
+          sudo apt-get install python3.10-venv pip
           
       - name: Install venv
         run: |
