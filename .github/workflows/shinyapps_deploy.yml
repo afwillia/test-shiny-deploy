@@ -16,41 +16,10 @@ jobs:
     env:
       # This should not be necessary for installing from public repo's however remotes::install_github() fails without it.
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      POETRY_VERSION: 1.2.0rc1
       
-    steps:
-      - name: Install System Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y pip python3.10-venv
-          
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-pandoc@v2
       
-      - name: Create and Activate Python Virtual Environment
-        shell: bash
-        run: |
-          python3.10 -m venv .venv
-          chmod 755 .venv/bin/activate
-          .venv/bin/activate
-      
-      - name: python
-        shell: bash
-        run: |
-          source .venv/bin/activate
-          pip install --upgrade pip
-          pip install poetry
-          git clone --single-branch --branch develop https://github.com/sage-bionetworks/schematic
-          cd schematic
-          poetry config virtualenvs.create false
-          poetry build
-          pip install dist/schematicpy-1.0.0-py3-none-any.whl
-          
-      - name: zip virtual env
-        shell: bash
-        run: |
-          zip -rm .venv.zip .venv
-          
       - name: Authorize and deploy app
         shell: Rscript {0}
         run: |
@@ -65,5 +34,5 @@ jobs:
           
            message(sprintf("Deploying to %s instance.", appName))
           rsconnect::setAccountInfo(rsConnectUser, rsConnectToken, rsConnectSecret)
-          rsconnect::configureApp(appName = appName, size = "medium", logLevel = "verbose")
+          rsconnect::configureApp(appName = appName, size = "large", logLevel = "verbose")
           rsconnect::deployApp(appName = appName)
