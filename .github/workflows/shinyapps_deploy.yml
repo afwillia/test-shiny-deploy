@@ -33,7 +33,7 @@ jobs:
       - name: Install schematic
         run: |
           source .venv/bin/activate
-          git clone --single-branch --branch develop https://github.com/sage-bionetworks.org/schematic
+          git clone --single-branch --branch develop https://github.com/sage-bionetworks/schematic
           cd schematic
           poetry config virtualenvs.create false
           poetry install
