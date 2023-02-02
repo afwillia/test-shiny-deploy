@@ -36,8 +36,8 @@ jobs:
           source .venv/bin/activate
           git clone --single-branch --branch develop https://github.com/sage-bionetworks/schematic
           cd schematic
-          poetry config virtualenvs.create false
-          poetry install
+          /github/home/.local/bin/poetry config virtualenvs.create false
+          /github/home/.local/bin/poetry install
 
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-pandoc@v2
