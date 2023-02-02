@@ -65,5 +65,5 @@ jobs:
           
            message(sprintf("Deploying to %s instance.", appName))
           rsconnect::setAccountInfo(rsConnectUser, rsConnectToken, rsConnectSecret)
-          rsconnect::configureApp(appName = appName, size = "small")
+          rsconnect::configureApp(appName = appName, size = "medium", logLevel = "verbose")
           rsconnect::deployApp(appName = appName)
