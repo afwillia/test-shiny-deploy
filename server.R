@@ -4,7 +4,7 @@ server <- function(input, output){
   
   py_ver <- "3.10.7"
   install_python(version = py_ver)
-  use_python(py_ver)
+  use_python("/home/shiny/.pyenv/versions/3.10.7/bin/python3")
   virtualenv_create("venv", python_version = py_ver)
   use_virtualenv(".venv", required = TRUE)
   #message(list.files("/home/shiny/.pyenv/versions/3.10.7"))
