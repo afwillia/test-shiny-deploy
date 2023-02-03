@@ -65,5 +65,5 @@ jobs:
           
            message(sprintf("Deploying to %s instance.", appName))
           rsconnect::setAccountInfo(rsConnectUser, rsConnectToken, rsConnectSecret)
-          rsconnect::deployApp(appName = appName)
+          rsconnect::deployApp(appName = appName, image="sagebionetworks/shiny-base:release-1.0")
           rsconnect::configureApp(appName = appName, size = "xxxlarge", logLevel = "verbose")
