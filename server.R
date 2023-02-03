@@ -6,6 +6,7 @@ server <- function(input, output){
   install_python(version = py_ver)
   use_python("/home/shiny/.pyenv/versions/3.10.7/bin/python3")
   virtualenv_create("venv", python_version = py_ver)
+  message(paste(list.files(all.files=TRUE), collapse = ", "))
   use_virtualenv("./.venv", required = TRUE)
   import("schematicpy")
   #message(list.files("/home/shiny/.pyenv/versions/3.10.7"))
