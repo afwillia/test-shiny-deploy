@@ -1,7 +1,8 @@
 server <- function(input, output){
   
   library(reticulate)
-  
+  if (!file.exists(".venv")) utils::unzip(".venv.zip")
+  system("chmod -R +x .venv")
   py_ver <- "3.10.7"
   install_python(version = py_ver)
   use_python("/home/shiny/.pyenv/versions/3.10.7/bin/python3")

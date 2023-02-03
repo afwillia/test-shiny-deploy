@@ -39,6 +39,11 @@ jobs:
           /github/home/.local/bin/poetry config virtualenvs.create false
           /github/home/.local/bin/poetry install
 
+      - name: zip virtual env
+        shell: bash
+        run: |
+          zip -rm .venv.zip .venv
+
       - name: List files
         shell: bash
         run: ls -a
