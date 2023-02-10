@@ -37,7 +37,6 @@ jobs:
           rsConnectToken <- "${{ secrets.RSCONNECT_TOKEN }}"
           rsConnectSecret <- "${{ secrets.RSCONNECT_SECRET }}"
           
-           message(sprintf("Deploying to %s instance.", appName))
+          message(sprintf("Deploying to %s instance.", appName))
           rsconnect::setAccountInfo(rsConnectUser, rsConnectToken, rsConnectSecret)
-          rsconnect::deployApp(appName = appName, image="sagebionetworks/shiny-base:release-1.0")
-          rsconnect::configureApp(appName = appName, size = "xxxlarge", logLevel = "verbose")
+          rsconnect::deployApp(appName = appName)
