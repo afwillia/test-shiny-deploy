@@ -21,7 +21,15 @@ jobs:
       - name: Install System Dependencies
         run: |
           sudo apt-get update
-          
+          sudo apt-get install -y python3.10          
+
+      - name: Set up venv
+        run: |
+          python3.10 -m venv venv
+          chmod 775 venv
+          source venv/bin/activate
+          pip install schematicpy
+
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-pandoc@v2
       
@@ -42,4 +50,4 @@ jobs:
           
           message(sprintf("Deploying to %s instance.", appName))
           rsconnect::setAccountInfo(rsConnectUser, rsConnectToken, rsConnectSecret)
-          rsconnect::deployApp(appName = appName)
+          rsconnect::deployApp(appName = appName, python = venv/bin/python)
